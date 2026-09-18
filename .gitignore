@@ -1,0 +1,23 @@
+# Dependencies and generated build output
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+*.log
+
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
