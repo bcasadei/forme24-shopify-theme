@@ -15,32 +15,20 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Épure  Collection",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "heading": "Épure No. 01 | Timeless Style",
+            "heading_size": "h1"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "heading"
       ],
       "settings": {
         "image": "shopify://shop_images/hero-espure-desktop.png",
         "image_overlay_opacity": 40,
-        "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-center",
+        "image_height": "small",
+        "image_behavior": "ambient",
+        "desktop_content_position": "top-left",
         "desktop_content_alignment": "center",
         "show_text_box": false,
         "color_scheme": "scheme-3",
@@ -53,16 +41,16 @@
       "type": "featured-collection",
       "settings": {
         "collection": "all",
-        "products_to_show": 8,
+        "products_to_show": 3,
         "title": "Featured products",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "columns_desktop": 4,
+        "columns_desktop": 3,
         "enable_desktop_slider": false,
         "full_width": false,
-        "show_view_all": true,
+        "show_view_all": false,
         "view_all_style": "solid",
         "color_scheme": "scheme-1",
         "image_ratio": "adapt",
@@ -71,15 +59,98 @@
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "columns_mobile": "2",
+        "columns_mobile": "1",
         "swipe_on_mobile": false,
-        "padding_top": 44,
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "collection_list_xXW9Ab": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_E63tFX": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "vitesse"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_E63tFX"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_ratio": "adapt",
+        "columns_desktop": 1,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
+    "multicolumn_zqNPVP": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_Xg8ann": {
+          "type": "column",
+          "settings": {
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_JxndM8": {
+          "type": "column",
+          "settings": {
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_RNTrtK": {
+          "type": "column",
+          "settings": {
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_Xg8ann",
+        "column_JxndM8",
+        "column_RNTrtK"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
         "padding_bottom": 36
       }
     }
   },
   "order": [
     "image_banner",
-    "featured_collection"
+    "featured_collection",
+    "collection_list_xXW9Ab",
+    "multicolumn_zqNPVP"
   ]
 }
