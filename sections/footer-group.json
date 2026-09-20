@@ -14,7 +14,8 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "color_scheme": "scheme-1",
+        "background_image": "shopify://shop_images/Epure-Lifestyle_001b.png",
+        "color_scheme": "scheme-3",
         "newsletter_enable": true,
         "newsletter_heading": "Subscribe to our emails",
         "enable_follow_on_shop": true,

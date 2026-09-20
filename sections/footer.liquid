@@ -17,10 +17,21 @@
 
   {% if section.settings.background_image != blank %}
     .section-{{ section.id }}-padding.footer {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .section-{{ section.id }}-padding.footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
       background-image: url('{{ section.settings.background_image | image_url: width: 2400 }}');
       background-size: cover;
-      background-position: center;
+      background-position: {{ section.settings.background_image_position_x }}% {{ section.settings.background_image_position_y }}%;
       background-repeat: no-repeat;
+      opacity: {{ section.settings.background_image_opacity | divided_by: 100.0 }};
+      pointer-events: none;
     }
   {% endif %}
 
@@ -437,6 +448,36 @@
       "type": "image_picker",
       "id": "background_image",
       "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "background_image_position_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Background image horizontal position",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "background_image_position_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Background image vertical position",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "background_image_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Background image opacity",
+      "default": 100
     },
     {
       "type": "color_scheme",
