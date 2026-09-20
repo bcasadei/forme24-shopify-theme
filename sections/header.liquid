@@ -283,13 +283,17 @@
       {% render 'header-search', input_id: 'Search-In-Modal' %}
 
       {%- if shop.customer_accounts_enabled -%}
-        <shopify-account
-          menu="{{ settings.customer_account_menu | default: 'customer-account-main-menu' }}"
+        <button
+          type="button"
           class="header__icon header__icon--account link focus-inset"
+          aria-label="{{ 'customer.log_in' | t }}"
+          aria-haspopup="dialog"
+          aria-controls="AccountNotice-{{ section.id }}"
+          data-account-notice-trigger
         >
-          <span slot="signed-out-avatar" class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
-          <span slot="signed-out-avatar" class="visually-hidden">{{ 'customer.log_in' | t }}</span>
-        </shopify-account>
+          <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+          <span class="visually-hidden">{{ 'customer.log_in' | t }}</span>
+        </button>
       {%- endif -%}
 
       {%- for block in section.blocks -%}
@@ -318,6 +322,35 @@
     </div>
   </header>
 </{{ header_tag }}>
+
+{%- if shop.customer_accounts_enabled -%}
+  <dialog
+    id="AccountNotice-{{ section.id }}"
+    class="demo-form-notice"
+    aria-labelledby="AccountNoticeTitle-{{ section.id }}"
+  >
+    <h2 id="AccountNoticeTitle-{{ section.id }}" class="footer-block__heading">
+      FORME24 is a fictional watch brand created as an example project. The form has not been submitted
+    </h2>
+    <div class="demo-form-notice__actions">
+      <button type="button" class="button" data-account-notice-close>Close</button>
+    </div>
+  </dialog>
+  <script>
+    (() => {
+      const trigger = document.querySelector('[aria-controls="AccountNotice-{{ section.id }}"]');
+      const dialog = document.getElementById('AccountNotice-{{ section.id }}');
+
+      if (!trigger || !dialog) return;
+
+      trigger.addEventListener('click', () => dialog.showModal());
+      dialog.querySelector('[data-account-notice-close]').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    })();
+  </script>
+{%- endif -%}
 
 {%- if settings.cart_type == 'notification' -%}
   {%- render 'cart-notification',

@@ -190,7 +190,7 @@
               {%- if section.settings.newsletter_heading != blank -%}
                 <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
               {%- endif -%}
-              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form', novalidate: 'novalidate', onsubmit: 'return false;' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
                 <div class="newsletter-form__field-wrapper">
                   <div class="field">
@@ -218,11 +218,12 @@
                       {{ 'newsletter.label' | t }}
                     </label>
                     <button
-                      type="submit"
+                      type="button"
                       class="newsletter-form__button field__button"
                       name="commit"
                       id="Subscribe"
                       aria-label="{{ 'newsletter.button_label' | t }}"
+                      data-footer-newsletter-trigger
                     >
                       <span class="svg-wrapper">
                         {{- 'icon-arrow.svg' | inline_asset_content -}}
@@ -253,6 +254,53 @@
                   </h3>
                 {%- endif -%}
               {%- endform -%}
+              <dialog
+                id="FooterNewsletterNotice-{{ section.id }}"
+                class="demo-form-notice"
+                aria-labelledby="FooterNewsletterNoticeTitle-{{ section.id }}"
+              >
+                <h2 id="FooterNewsletterNoticeTitle-{{ section.id }}" class="footer-block__heading">
+                  FORME24 is a fictional watch brand created as an example project. The form has not been submitted
+                </h2>
+                <div class="demo-form-notice__actions">
+                  <button type="button" class="button" data-footer-newsletter-close>Close</button>
+                </div>
+              </dialog>
+              <script>
+                (() => {
+                  const form = document.getElementById('ContactFooter');
+                  const dialog = document.getElementById('FooterNewsletterNotice-{{ section.id }}');
+
+                  if (!form || !dialog) return;
+
+                  const openNotice = () => {
+                    if (!dialog.open) dialog.showModal();
+                  };
+
+                  form.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    openNotice();
+                  });
+
+                  form.querySelector('[data-footer-newsletter-trigger]').addEventListener('click', () => {
+                    openNotice();
+                  });
+
+                  form.addEventListener('keydown', (event) => {
+                    if (event.key !== 'Enter' || event.isComposing || event.target.matches('textarea, button')) return;
+                    event.preventDefault();
+                    openNotice();
+                  });
+
+                  dialog.querySelector('[data-footer-newsletter-close]').addEventListener('click', () => {
+                    dialog.close();
+                  });
+
+                  dialog.addEventListener('click', (event) => {
+                    if (event.target === dialog) dialog.close();
+                  });
+                })();
+              </script>
             </div>
           {%- endif -%}
 
@@ -328,9 +376,22 @@
             {%- for policy in shop.policies -%}
               {%- if policy != blank -%}
                 <li>
-                  <small class="copyright__content"
-                    ><a href="{{ policy.url }}">{{ policy.title | escape }}</a></small
-                  >
+                  {%- assign policy_title_downcase = policy.title | downcase -%}
+                  {%- if policy.url == shop.privacy_policy.url or policy_title_downcase contains 'privacy' -%}
+                    <small class="copyright__content">
+                      <button
+                        type="button"
+                        class="footer-policy-modal-trigger link link--text"
+                        aria-haspopup="dialog"
+                        aria-controls="FooterPrivacyNotice-{{ section.id }}"
+                        data-footer-privacy-trigger
+                      >
+                        {{ policy.title | escape }}
+                      </button>
+                    </small>
+                  {%- else -%}
+                    <small class="copyright__content"><a href="{{ policy.url }}">{{ policy.title | escape }}</a></small>
+                  {%- endif -%}
                 </li>
               {%- endif -%}
             {%- endfor -%}
@@ -340,6 +401,112 @@
     </div>
   </div>
 </footer>
+
+{%- if section.settings.show_policy and shop.privacy_policy != blank -%}
+  <dialog
+    id="FooterPrivacyNotice-{{ section.id }}"
+    class="demo-form-notice"
+    aria-labelledby="FooterPrivacyNoticeTitle-{{ section.id }}"
+  >
+    <h2 id="FooterPrivacyNoticeTitle-{{ section.id }}" class="footer-block__heading">
+      FORME24 is a fictional watch brand created as an example project.
+    </h2>
+    <div class="demo-form-notice__actions">
+      <button type="button" class="button" data-footer-privacy-close>Close</button>
+    </div>
+  </dialog>
+  <script>
+    (() => {
+      const trigger = document.querySelector('[aria-controls="FooterPrivacyNotice-{{ section.id }}"]');
+      const dialog = document.getElementById('FooterPrivacyNotice-{{ section.id }}');
+
+      if (!trigger || !dialog) return;
+
+      trigger.addEventListener('click', () => dialog.showModal());
+      dialog.querySelector('[data-footer-privacy-close]').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{%- if shop.shipping_policy != blank -%}
+  <dialog
+    id="ShippingPolicyNotice-{{ section.id }}"
+    class="demo-form-notice"
+    aria-labelledby="ShippingPolicyNoticeTitle-{{ section.id }}"
+  >
+    <h2 id="ShippingPolicyNoticeTitle-{{ section.id }}" class="footer-block__heading">
+      FORME24 is a fictional watch brand created as an example project.
+    </h2>
+    <div class="demo-form-notice__actions">
+      <button type="button" class="button" data-shipping-policy-close>Close</button>
+    </div>
+  </dialog>
+  <script>
+    (() => {
+      const dialog = document.getElementById('ShippingPolicyNotice-{{ section.id }}');
+      const shippingPolicyPath = {{ shop.shipping_policy.url | json }};
+
+      if (!dialog || !shippingPolicyPath) return;
+
+      const openNotice = () => {
+        if (!dialog.open) dialog.showModal();
+      };
+
+      document.addEventListener('click', (event) => {
+        const link = event.target.closest('a[href]');
+        if (!link) return;
+
+        const linkUrl = new URL(link.href, window.location.origin);
+        const policyPath = new URL(shippingPolicyPath, window.location.origin).pathname;
+
+        if (linkUrl.origin === window.location.origin && linkUrl.pathname === policyPath) {
+          event.preventDefault();
+          openNotice();
+        }
+      });
+
+      dialog.querySelector('[data-shipping-policy-close]').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    })();
+  </script>
+{%- endif -%}
+
+<dialog
+  id="CheckoutUnavailableNotice-{{ section.id }}"
+  class="demo-form-notice"
+  aria-labelledby="CheckoutUnavailableNoticeTitle-{{ section.id }}"
+>
+  <h2 id="CheckoutUnavailableNoticeTitle-{{ section.id }}" class="footer-block__heading">
+    FORME24 is a fictional watch brand created as an example project. Checkout is not available.
+  </h2>
+  <div class="demo-form-notice__actions">
+    <button type="button" class="button" data-checkout-unavailable-close>Close</button>
+  </div>
+</dialog>
+<script>
+  (() => {
+    const dialog = document.getElementById('CheckoutUnavailableNotice-{{ section.id }}');
+    if (!dialog) return;
+
+    document.addEventListener('click', (event) => {
+      const trigger = event.target.closest('[data-checkout-unavailable-trigger]');
+      if (!trigger) return;
+
+      event.preventDefault();
+      if (!dialog.open) dialog.showModal();
+    });
+
+    dialog.querySelector('[data-checkout-unavailable-close]').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  })();
+</script>
 
 {% schema %}
 {

@@ -576,11 +576,11 @@
 
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <button
-            type="submit"
+            type="button"
             id="CartDrawer-Checkout"
             class="cart__checkout-button button"
             name="checkout"
-            form="CartDrawer-Form"
+            data-checkout-unavailable-trigger
             {% if cart == empty %}
               disabled
             {% endif %}

@@ -94,7 +94,15 @@
             {%- render 'loading-spinner' -%}
           </button>
           {%- if show_dynamic_checkout -%}
-            {{ form | payment_button }}
+            <div class="shopify-payment-button">
+              <button
+                type="button"
+                class="button shopify-payment-button__button shopify-payment-button__button--unbranded button--full-width"
+                data-checkout-unavailable-trigger
+              >
+                Buy it now
+              </button>
+            </div>
           {%- endif -%}
         </div>
       {%- endform -%}

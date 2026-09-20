@@ -1223,6 +1223,15 @@ button.shopify-payment-button__button--unbranded {
   min-height: calc(4.5rem + var(--buttons-border-width) * 2);
 }
 
+.shopify-payment-button__button--unbranded.button--full-width::after {
+  box-shadow: 0 0 0 var(--buttons-border-width) #000;
+}
+
+.shopify-payment-button__button--unbranded.button--full-width.button:hover::after {
+  --border-offset: 1.3px;
+  box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) #000;
+}
+
 .button,
 .shopify-challenge__button,
 .customer button {
@@ -1361,6 +1370,13 @@ shopify-accelerated-checkout-cart {
 .button--full-width {
   display: flex;
   width: 100%;
+}
+
+.shopify-payment-button__button--unbranded.button--full-width {
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: center;
+  text-align: center;
 }
 
 .button.loading {
@@ -2542,6 +2558,13 @@ input[type='checkbox'] {
   color: rgb(var(--color-foreground));
 }
 
+.header__icon--account {
+  background: transparent;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
 .header__icon span {
   height: 100%;
 }
@@ -3535,6 +3558,11 @@ details-disclosure > details {
 
   .animate--hover-vertical-lift .button:not([disabled]).button--secondary:hover:after {
     --border-offset: 0px; /* Prevent the border from growing on buttons when this effect is on. */
+  }
+
+  .animate--hover-vertical-lift .shopify-payment-button__button--unbranded.button--full-width:hover::after {
+    --border-offset: 0.3px;
+    box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) #000;
   }
 }
 
