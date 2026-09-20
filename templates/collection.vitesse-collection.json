@@ -37,7 +37,7 @@
         "padding_bottom": 36
       }
     },
-    "image_banner_3WBez7": {
+    "image_banner_fjeiej": {
       "type": "image-banner",
       "name": "t:sections.image-banner.presets.name",
       "settings": {
@@ -49,15 +49,47 @@
         "desktop_content_alignment": "center",
         "show_text_box": true,
         "color_scheme": "",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "left",
         "show_text_below": false
+      }
+    },
+    "rich_text_xCkcNe": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_GbRLf8": {
+          "type": "heading",
+          "settings": {
+            "heading": "Forme24 | Vitesse",
+            "heading_size": "h1"
+          }
+        },
+        "text_DfMcat": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Inspired by the precision and energy of motorsport, Vitesse combines purposeful chronograph design with a distinctly modern aesthetic. Bold dials, contrasting finishes, and carefully balanced details give each timepiece a confident presence—built around the art of measuring every moment.<br/><br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_GbRLf8",
+        "text_DfMcat"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     }
   },
   "order": [
     "banner",
     "product-grid",
-    "image_banner_3WBez7"
+    "image_banner_fjeiej",
+    "rich_text_xCkcNe"
   ]
 }

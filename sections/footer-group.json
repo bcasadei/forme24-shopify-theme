@@ -17,7 +17,7 @@
         "background_image": "shopify://shop_images/Epure-Lifestyle_001c_5e9a08d4-62a1-411f-9f2d-cdbadeb0b167.png",
         "background_image_position_x": 40,
         "background_image_position_y": 0,
-        "background_image_opacity": 50,
+        "background_image_opacity": 60,
         "color_scheme": "scheme-3",
         "newsletter_enable": true,
         "newsletter_heading": "Subscribe to our emails",

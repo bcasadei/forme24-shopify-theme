@@ -43,7 +43,7 @@
       "settings": {
         "image": "shopify://shop_images/Epure-Collection.png",
         "image_overlay_opacity": 0,
-        "image_height": "medium",
+        "image_height": "adapt",
         "image_behavior": "none",
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
@@ -53,11 +53,43 @@
         "mobile_content_alignment": "center",
         "show_text_below": true
       }
+    },
+    "rich_text_MT8xyn": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Rytxjj": {
+          "type": "heading",
+          "settings": {
+            "heading": "Forme24 | Épure",
+            "heading_size": "h1"
+          }
+        },
+        "text_TmekGD": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Épure is an exercise in restraint. Clean dials, refined proportions, and carefully considered finishes create a collection where every detail has purpose. Designed for those who appreciate simplicity, Épure brings quiet sophistication to the everyday.<br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Rytxjj",
+        "text_TmekGD"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "banner",
     "product-grid",
-    "image_banner_h7UrxF"
+    "image_banner_h7UrxF",
+    "rich_text_MT8xyn"
   ]
 }
